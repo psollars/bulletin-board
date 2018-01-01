@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 
 class Note extends Component {
   render() {
     return (
-      <div className="Note">
+      <div className="note">
         <p></p>
         <span>
           <button>EDIT</button>
