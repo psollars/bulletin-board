@@ -4,14 +4,23 @@ class Note extends Component {
   render() {
     return (
       <div className="note">
-        <p></p>
+        <p>{this.props.children}</p>
         <span>
-          <button>EDIT</button>
-          <button>REMOVE</button>
+          <button onClick={this.handleEdit}>EDIT</button>
+          <button onClick={this.handleRemove}>REMOVE</button>
         </span>
       </div>
     );
   }
+
+  handleEdit = () => {
+    alert("yo");
+  };
+
+  handleRemove = () => {
+    alert("yoremove");
+  };
+
 }
 
 export default Note;
