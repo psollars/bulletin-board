@@ -13,7 +13,7 @@ class Note extends Component {
     return (
       (this.state.editing) ? 
       <div className="note">
-        <textarea ref="newText"></textarea>
+        <textarea ref="newText">{this.props.children}</textarea>
         <button onClick={this.handleSave}>SAVE</button>
       </div>
     : 
