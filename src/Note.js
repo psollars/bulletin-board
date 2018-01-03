@@ -11,6 +11,12 @@ class Note extends Component {
 
   render() {
     return (
+      (this.state.editing) ? 
+      <div className="note">
+        <textarea ref="newText"></textarea>
+        <button onClick={this.handleSave}>SAVE</button>
+      </div>
+    : 
       <div className="note">
         <p>{this.props.children}</p>
         <span>
@@ -22,12 +28,11 @@ class Note extends Component {
   }
 
   handleEdit = () => {
-    alert("yo");
     this.setState({editing: true})
   };
 
   handleSave = () => {
-    alert("yosave");
+    this.props.saveNote(this.refs.newText.value, this.props.id)
     this.setState({editing: false})
   };
 

@@ -26,13 +26,23 @@ class Board extends Component {
 
   eachNote = (note) => {
     return (<Note key={note.id}
-                  id={note.id}>
+                  id={note.id}
+                  saveNote={this.saveNote}>
               {note.text}
             </Note>);
   };
 
-
-
+  saveNote = (newText, id) => {
+    const notes = this.state.notes.map(
+        note => (note.id !== id) ?
+           note : 
+            {
+                ...note, 
+                text: newText
+            }
+        )
+    this.setState({notes})
+  };
 
 }
 
