@@ -37,7 +37,7 @@ class Note extends Component {
   };
 
   handleRemove = () => {
-    alert("yoremove");
+    this.props.removeNote(this.props.id)
   };
 
 }

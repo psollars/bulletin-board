@@ -27,7 +27,8 @@ class Board extends Component {
   eachNote = (note) => {
     return (<Note key={note.id}
                   id={note.id}
-                  saveNote={this.saveNote}>
+                  saveNote={this.saveNote}
+                  removeNote={this.removeNote}>
               {note.text}
             </Note>);
   };
@@ -43,6 +44,11 @@ class Board extends Component {
         )
     this.setState({notes})
   };
+
+  removeNote = (id) => {
+    const notes = this.state.notes.filter(note => note.id !== id)
+    this.setState({notes})
+  }
 
 }
 
