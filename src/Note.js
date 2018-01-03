@@ -16,7 +16,7 @@ class Note extends Component {
         <textarea ref="newText">{this.props.children}</textarea>
         <button onClick={this.handleSave}>SAVE</button>
       </div>
-    : 
+      : 
       <div className="note">
         <p>{this.props.children}</p>
         <span>

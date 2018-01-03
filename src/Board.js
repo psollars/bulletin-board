@@ -15,11 +15,15 @@ class Board extends Component {
     };
   }
 
+  componentDidMount() {
+    getNotes();
+  }
+
   render() {
     return (
       <div className="board">
         {this.state.notes.map(this.eachNote)}
-        <button onClick={getNotes}>getNotes</button>
+        <button onClick={() => this.addNote('New Note')}>+</button>
       </div>
     );
   }
@@ -32,6 +36,22 @@ class Board extends Component {
               {note.text}
             </Note>);
   };
+
+  nextId = () => {
+      this.uniqueId = this.uniqueId || 0
+      return this.uniqueId++
+  };
+  
+  addNote = (text) => {
+      var notes = [
+          ...this.state.notes,
+          {
+              id: this.nextId(),
+              text: text
+          }
+      ]
+      this.setState({notes})
+  }
 
   saveNote = (newText, id) => {
     const notes = this.state.notes.map(
