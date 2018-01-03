@@ -6,17 +6,12 @@ class Board extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      notes: [
-        {id: 0, text: "go to grocery store"},
-        {id: 1, text: "shovel driveway"},
-        {id: 2, text: "play zelda"},
-        {id: 3, text: "listen to radiohead"}
-      ] 
+      notes: [] 
     };
   }
 
   componentDidMount() {
-    getNotes();
+    //getNotes();
   }
 
   render() {
