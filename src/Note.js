@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 
 class Note extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      editing: false
+    }
+  }
+
+
   render() {
     return (
       <div className="note">
@@ -15,6 +23,12 @@ class Note extends Component {
 
   handleEdit = () => {
     alert("yo");
+    this.setState({editing: true})
+  };
+
+  handleSave = () => {
+    alert("yosave");
+    this.setState({editing: false})
   };
 
   handleRemove = () => {
