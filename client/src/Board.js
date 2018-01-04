@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import getNotes from './Actions';
+import {getNotes} from './Actions';
 import Note from './Note';
 
 class Board extends Component {
@@ -11,7 +11,7 @@ class Board extends Component {
   }
 
   componentDidMount() {
-    //getNotes();
+    getNotes();
   }
 
   render() {
