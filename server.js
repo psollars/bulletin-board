@@ -32,10 +32,10 @@ app.get("/api/", (req, res) => {
 });
 
 app.post('/api/', function(req, res) {
-    const item = req.body;
+    const note = req.body;
     pool.connect().then(function(client) {
-        return client.query("INSERT INTO list(item, price) VALUES ($1, $2)",
-                             [item.item, item.price])
+        return client.query("INSERT INTO notes(text) VALUES ($1)",
+                             [note.text])
         .then(function() {
             res.send("SUCCESS");
         });
@@ -44,17 +44,18 @@ app.post('/api/', function(req, res) {
 
 app.delete('/api/:id', function(req, res) {
     const id = req.params.id;
-    pool.query("DELETE FROM list WHERE id = $1", [id]).then(function() {
+    pool.query("DELETE FROM notes WHERE id = $1", 
+                [id]).then(function() {
         res.send("SUCCESS");
     }).catch(errorCallback);
 });
 
 app.put('/api/:id', function(req, res) {
-    var id = req.params.id;
-    var item = req.body;
+    const id = req.params.id;
+    const note = req.body;
     pool.connect().then(function(client) {
-        return client.query("UPDATE list SET item = $1, price = $2 WHERE ID = $3",
-                            [item.item, item.price, id]).then(function() {
+        return client.query("UPDATE notes SET text = $1 WHERE ID = $2",
+                            [note.text, id]).then(function() {
             res.send("SUCCESS");
         });
     }).catch(errorCallback);
