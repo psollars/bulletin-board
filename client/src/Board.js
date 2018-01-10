@@ -20,7 +20,7 @@ class Board extends Component {
     return (
       <div className="board">
         {this.state.notes.map(this.eachNote)}
-        <button onClick={() => this.addNote('New Note')}>+</button>
+        <button onClick={() => this.addNote({"text" : "New Note"})}>+</button>
       </div>
     );
   }
@@ -39,15 +39,18 @@ class Board extends Component {
       return this.uniqueId++
   };
   
-  addNote = (text) => {
-      var notes = [
-          ...this.state.notes,
-          {
-              id: this.nextId(),
-              text: text
-          }
-      ]
-      this.setState({notes})
+  addNote = (note) => {
+    $.ajax({
+        url: "/api/",
+        method: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(note)
+    }).done(function() {
+        this.getNotes();
+      }.bind(this))
+    .fail(function() {
+      console.log("There was an error retrieving the notes.");
+    });
   };
 
   saveNote = (newText, id) => {
@@ -55,8 +58,8 @@ class Board extends Component {
         note => (note.id !== id) ?
            note : 
             {
-                ...note, 
-                text: newText
+              ...note, 
+              text: newText
             }
         )
     this.setState({notes})
