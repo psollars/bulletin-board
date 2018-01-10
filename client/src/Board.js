@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import {getNotes} from './Actions';
+//import {getNotes} from './Actions';
 import Note from './Note';
+import $ from "jquery-ajax";
 
 class Board extends Component {
   constructor(props) {
@@ -11,7 +12,8 @@ class Board extends Component {
   }
 
   componentDidMount() {
-    getNotes();
+    this.getNotes();
+
   }
 
   render() {
@@ -46,7 +48,7 @@ class Board extends Component {
           }
       ]
       this.setState({notes})
-  }
+  };
 
   saveNote = (newText, id) => {
     const notes = this.state.notes.map(
@@ -63,8 +65,18 @@ class Board extends Component {
   removeNote = (id) => {
     const notes = this.state.notes.filter(note => note.id !== id)
     this.setState({notes})
-  }
+  };
 
-}
+  getNotes = () => {
+    $.get("/api/").done(function(notes) {
+      console.log(notes);
+      this.setState({notes});
+    }.bind(this))
+    .fail(function() {
+      console.log("There was an error retrieving the notes.");
+    });
+  };
+
+} // end of component
 
 export default Board;
