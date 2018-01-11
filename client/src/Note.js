@@ -23,6 +23,10 @@ class Note extends Component {
     }
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.props.children !== nextProps.children || this.state !== nextState
+  }
+
   render() {
     return (
       (this.state.editing) ? 
