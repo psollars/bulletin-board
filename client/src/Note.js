@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Draggable from 'react-draggable';
 
 class Note extends Component {
   constructor(props) {
@@ -12,18 +13,22 @@ class Note extends Component {
   render() {
     return (
       (this.state.editing) ? 
-      <div className="note">
-        <textarea ref="newText" defaultValue={this.props.children}></textarea>
-        <button onClick={this.handleSave}>SAVE</button>
-      </div>
+      <Draggable>
+        <div className="note">
+          <textarea ref="newText" defaultValue={this.props.children}></textarea>
+          <button onClick={this.handleSave}>SAVE</button>
+        </div>
+      </Draggable>
       : 
-      <div className="note">
-        <p>{this.props.children}</p>
-        <span>
-          <button onClick={this.handleEdit}>EDIT</button>
-          <button onClick={this.handleRemove}>REMOVE</button>
-        </span>
-      </div>
+      <Draggable>
+        <div className="note">
+          <p>{this.props.children}</p>
+          <span>
+            <button onClick={this.handleEdit}>EDIT</button>
+            <button onClick={this.handleRemove}>REMOVE</button>
+          </span>
+        </div>
+      </Draggable>
     );
   }
 

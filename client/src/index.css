@@ -24,7 +24,7 @@ div.note {
   width: 150px;
   background-color: #ffff9a;
   margin: 2px 0;
-  position: relative; /*change to absolute once moving is implemented*/
+  position: absolute;
   cursor: -webkit-grab;
   box-shadow: 5px 5px 15px 0 rgba(0, 0, 0, .2);
   overflow: hidden;
