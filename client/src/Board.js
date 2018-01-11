@@ -41,9 +41,9 @@ class Board extends Component {
         data: JSON.stringify(note)
     }).done(function() {
         this.getNotes();
-      }.bind(this))
+    }.bind(this))
     .fail(function() {
-      console.log("There was an error retrieving the notes.");
+      console.log("There was an error adding the note.");
     });
   };
 
@@ -60,8 +60,15 @@ class Board extends Component {
   };
 
   removeNote = (id) => {
-    const notes = this.state.notes.filter(note => note.id !== id)
-    this.setState({notes})
+    $.ajax({
+        url: "/api/" + encodeURIComponent(id),
+        method: "DELETE"
+    }).done(function() {
+      this.getNotes();
+    }.bind(this))
+    .fail(function() {
+      console.log("There was an error removing the note.");
+    });
   };
 
   getNotes = () => {
