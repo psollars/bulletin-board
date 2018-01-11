@@ -16,6 +16,13 @@ class Note extends Component {
     }
   }
 
+  componentDidUpdate() {
+    if (this.state.editing) {
+      this.refs.newText.focus();
+      this.refs.newText.select();
+    }
+  }
+
   render() {
     return (
       (this.state.editing) ? 
