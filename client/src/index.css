@@ -27,7 +27,6 @@ div.note {
   position: absolute;
   cursor: -webkit-grab;
   box-shadow: 5px 5px 15px 0 rgba(0, 0, 0, .2);
-  overflow: hidden;
 }
 
 div.note:active {
@@ -41,25 +40,52 @@ div.note p {
   font-family: "Shadows Into Light", Arial;
 }
 
-div.note:hover > span {
+div.note:hover .edit-note {
   opacity: 1;
 }
 
-div.note > span {
+div.edit-note {
   position: absolute;
-  bottom: 2px;
-  right: 2px;
+  bottom: 5px;
+  right: 5px;
   opacity: 0;
   transition: opacity .25s linear;
 }
 
-div.note button {
-  margin: 2px;
+div.note:hover .remove-note{
+  opacity: 1;
 }
 
-div.note > textarea {
-  height: 75%;
-  background: rgba(255, 255, 255, .5);
+div.remove-note {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  display: flex;
+  align-items: center;
+  height: 12px;
+  width: 12px;
+  color: #000;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #000;
+  border-radius: 50px;
+  padding: 5px;
+  opacity: 0;
+  transition: opacity .25s linear;
+}
+
+div.note textarea {
+  height: 146px;
+  width: 146px;
+  border: none;
+  resize: none;
+  background: rgba(255, 255, 255, 0);
+  outline: none;
+}
+
+div.save-note {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
 }
 
 .board .add-note {

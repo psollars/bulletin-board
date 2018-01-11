@@ -23,18 +23,16 @@ class Note extends Component {
         <div className="note"
              style={this.style}>
           <textarea ref="newText" defaultValue={this.props.children}></textarea>
-          <button onClick={this.handleSave}>SAVE</button>
+          <div className="save-note fa fa-floppy-o" onClick={this.handleSave}></div>
         </div>
       </Draggable>
       : 
       <Draggable>
         <div className="note"
              style={this.style}>
+          <div className="remove-note fa fa-times" onClick={this.handleRemove}></div>
           <p>{this.props.children}</p>
-          <span>
-            <button onClick={this.handleEdit}>EDIT</button>
-            <button onClick={this.handleRemove}>REMOVE</button>
-          </span>
+          <div className="edit-note fa fa-pencil" onClick={this.handleEdit}></div>
         </div>
       </Draggable>
     );
