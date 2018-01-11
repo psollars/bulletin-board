@@ -9,19 +9,27 @@ class Note extends Component {
     }
   }
 
+  componentWillMount() {
+    this.style = {
+      right: this.randomPlacement(0, window.innerWidth - 150, "px"),
+      top: this.randomPlacement(0, window.innerHeight - 150, "px"),
+    }
+  }
 
   render() {
     return (
       (this.state.editing) ? 
       <Draggable>
-        <div className="note">
+        <div className="note"
+             style={this.style}>
           <textarea ref="newText" defaultValue={this.props.children}></textarea>
           <button onClick={this.handleSave}>SAVE</button>
         </div>
       </Draggable>
       : 
       <Draggable>
-        <div className="note">
+        <div className="note"
+             style={this.style}>
           <p>{this.props.children}</p>
           <span>
             <button onClick={this.handleEdit}>EDIT</button>
@@ -31,6 +39,10 @@ class Note extends Component {
       </Draggable>
     );
   }
+
+  randomPlacement = (x, y, units) => {
+    return (x + Math.ceil(Math.random() * (y-x))) + units;
+  };
 
   handleEdit = () => {
     this.setState({editing: true})
