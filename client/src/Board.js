@@ -19,7 +19,7 @@ class Board extends Component {
     return (
       <div className="board">
         {this.state.notes.map(this.eachNote)}
-        <div className="add-note fa fa-plus" onClick={() => this.addNote({"text" : "New Note"})}></div>
+        <div className="add-note fa fa-plus" onClick={() => this.addNote("New Note")}></div>
       </div>
     );
   }
@@ -32,15 +32,25 @@ class Board extends Component {
               {note.text}
             </Note>);
   };
+
+  getNotes = () => {
+    $.get("/api/").done(function(notes) {
+      console.log(notes);
+      this.setState({notes});
+    }.bind(this))
+    .fail(function() {
+      console.log("There was an error retrieving the notes.");
+    });
+  };
   
   addNote = (note) => {
     $.ajax({
-        url: "/api/",
-        method: "POST",
-        contentType: "application/json",
-        data: JSON.stringify(note)
+      url: "/api/",
+      method: "POST",
+      contentType: "application/json",
+      data: JSON.stringify({"text" : note })
     }).done(function() {
-        this.getNotes();
+      this.getNotes();
     }.bind(this))
     .fail(function() {
       console.log("There was an error adding the note.");
@@ -48,15 +58,17 @@ class Board extends Component {
   };
 
   saveNote = (newText, id) => {
-    const notes = this.state.notes.map(
-        note => (note.id !== id) ?
-           note : 
-            {
-              ...note, 
-              text: newText
-            }
-        )
-    this.setState({notes})
+    $.ajax({
+      url: "/api/" + encodeURIComponent(id),
+      method: "PUT",
+      contentType: "application/json",
+      data: JSON.stringify({"text" : newText })
+    }).done(function() {
+      this.getNotes();
+    }.bind(this))
+    .fail(function() {
+      console.log("There was an error updating the note.");
+    });;
   };
 
   removeNote = (id) => {
@@ -68,16 +80,6 @@ class Board extends Component {
     }.bind(this))
     .fail(function() {
       console.log("There was an error removing the note.");
-    });
-  };
-
-  getNotes = () => {
-    $.get("/api/").done(function(notes) {
-      console.log(notes);
-      this.setState({notes});
-    }.bind(this))
-    .fail(function() {
-      console.log("There was an error retrieving the notes.");
     });
   };
 
