@@ -13,14 +13,13 @@ class Board extends Component {
 
   componentDidMount() {
     this.getNotes();
-
   }
 
   render() {
     return (
       <div className="board">
         {this.state.notes.map(this.eachNote)}
-        <button onClick={() => this.addNote({"text" : "New Note"})}>+</button>
+        <div className="add-note fa fa-plus" onClick={() => this.addNote({"text" : "New Note"})}></div>
       </div>
     );
   }
@@ -32,11 +31,6 @@ class Board extends Component {
                   removeNote={this.removeNote}>
               {note.text}
             </Note>);
-  };
-
-  nextId = () => {
-      this.uniqueId = this.uniqueId || 0
-      return this.uniqueId++
   };
   
   addNote = (note) => {
